@@ -15,7 +15,7 @@ Application d'analyse prédictive et de Machine Learning permettant d'évaluer e
 ## 🛠️ Stack Technique
 
 | Technologie | Utilisation |
-|---|---|
+| :--- | :--- |
 | **Python 3.9+** | Langage principal |
 | **Pandas** | Manipulation et analyse des données |
 | **NumPy** | Calcul numérique |
@@ -24,11 +24,11 @@ Application d'analyse prédictive et de Machine Learning permettant d'évaluer e
 | **Streamlit** | Interface web interactive |
 | **Joblib / Pickle** | Sauvegarde et chargement du modèle |
 
-### 🤖 Modèle utilisé
+---
 
-Le modèle principal utilisé dans le projet est un :
+## 🤖 Modèle Utilisé
 
-**Random Forest Classifier**
+Le modèle principal utilisé dans le projet est un **Random Forest Classifier**.
 
 Le modèle entraîné est sauvegardé dans le fichier :
 
@@ -36,7 +36,7 @@ Le modèle entraîné est sauvegardé dans le fichier :
 rf_balanced_model.pkl
 ```
 
-Le modèle est configuré afin de mieux gérer le déséquilibre potentiel entre les différentes classes de la variable cible.
+Le modèle est configuré afin de mieux gérer le déséquilibre potentiel entre les différentes classes de la variable cible (`class_weight='balanced'`).
 
 ---
 
@@ -73,7 +73,7 @@ Avant de commencer, assurez-vous d'avoir installé :
 - Git
 - pip
 
-Vous pouvez vérifier votre version de Python avec :
+Vérifiez votre version de Python :
 
 ```bash
 python --version
@@ -85,11 +85,6 @@ python --version
 
 ```bash
 git clone https://github.com/walidlabied09/social-media-impact-prediction.git
-```
-
-Puis accéder au répertoire :
-
-```bash
 cd social-media-impact-prediction
 ```
 
@@ -97,27 +92,17 @@ cd social-media-impact-prediction
 
 ### 3. Créer un environnement virtuel
 
-Sous Windows :
+**Sous Windows :**
 
 ```bash
 python -m venv env
-```
-
-Activer l'environnement virtuel :
-
-```bash
 .\env\Scripts\activate
 ```
 
-Sous Linux / macOS :
+**Sous Linux / macOS :**
 
 ```bash
 python3 -m venv env
-```
-
-Puis :
-
-```bash
 source env/bin/activate
 ```
 
@@ -125,13 +110,13 @@ source env/bin/activate
 
 ### 4. Installer les dépendances
 
-Installer les principales bibliothèques nécessaires :
+Installez les bibliothèques nécessaires :
 
 ```bash
 pip install streamlit scikit-learn pandas numpy joblib
 ```
 
-Vous pouvez également mettre pip à jour :
+Optionnel — mise à jour de pip :
 
 ```bash
 python -m pip install --upgrade pip
@@ -141,13 +126,11 @@ python -m pip install --upgrade pip
 
 ### 5. Lancer l'application
 
-Une fois les dépendances installées, exécuter :
-
 ```bash
 streamlit run app.py
 ```
 
-L'application sera normalement accessible à l'adresse :
+L'application est accessible à l'adresse :
 
 ```text
 http://localhost:8501
@@ -159,75 +142,46 @@ http://localhost:8501
 
 ### Random Forest Classifier
 
-Le projet utilise un **Random Forest Classifier** pour prédire l'intention d'achat des utilisateurs à partir de différentes caractéristiques liées à leur utilisation des réseaux sociaux.
+Le projet utilise un **Random Forest Classifier** pour prédire l'intention d'achat des utilisateurs à partir de différentes caractéristiques liées à leur comportement sur les réseaux sociaux.
 
-Le Random Forest est un algorithme d'apprentissage supervisé basé sur un ensemble d'arbres de décision.
+Cet algorithme d'apprentissage supervisé, basé sur un ensemble d'arbres de décision, permet notamment :
 
-Il permet notamment :
+- De gérer des relations non linéaires.
+- De travailler avec plusieurs variables explicatives.
+- De réduire le risque de surapprentissage par rapport à un arbre unique.
+- D'obtenir une mesure interprétable de l'importance des variables.
 
-- de gérer des relations non linéaires ;
-- de travailler avec plusieurs variables explicatives ;
-- de réduire le risque de surapprentissage par rapport à un arbre unique ;
-- d'obtenir une mesure de l'importance des variables.
+### ⚖️ Gestion du Déséquilibre des Classes
 
----
-
-## ⚖️ Gestion du Déséquilibre des Classes
-
-Le modèle est conçu pour prendre en compte un éventuel déséquilibre entre les classes de la variable cible.
-
-L'objectif est d'éviter qu'une classe majoritaire domine les prédictions du modèle et d'améliorer la capacité du classifieur à identifier correctement les différentes catégories.
-
-Le fichier du modèle entraîné est :
-
-```text
-rf_balanced_model.pkl
-```
+Le modèle intègre une stratégie de pondération afin d'éviter qu'une classe majoritaire n'écrase les prédictions et d'assurer une bonne détection sur l'ensemble des catégories.
 
 ---
 
 ## 📊 Évaluation du Modèle
 
-Les performances du modèle peuvent être évaluées à l'aide de plusieurs métriques de classification :
+Les performances sont suivies via les métriques standards de classification :
 
-### Precision
-
-Mesure la proportion de prédictions positives qui sont réellement positives.
-
-### Recall
-
-Mesure la capacité du modèle à identifier correctement les observations positives.
-
-### F1-Score
-
-Combine la précision et le rappel afin de fournir une mesure globale de la performance du modèle.
+- **Precision :** Proportion de prédictions positives qui sont réellement positives.
+- **Recall :** Capacité du modèle à identifier l'ensemble des observations positives.
+- **F1-Score :** Moyenne harmonique de la précision et du rappel pour une vision équilibrée de la performance.
 
 ---
 
 ## 🔎 Feature Importance
 
-Le Random Forest permet également d'analyser l'importance des différentes variables utilisées pour effectuer les prédictions.
+Le modèle permet d'extraire les variables prédictives les plus déterminantes dans l'acte d'achat :
 
-Cette analyse permet notamment d'identifier les facteurs liés aux réseaux sociaux qui contribuent le plus à la prédiction du comportement d'achat.
-
-Par exemple :
-
-- temps passé sur les réseaux sociaux ;
-- plateforme utilisée ;
-- type de contenu consulté ;
-- influence des influenceurs ;
-- fréquence d'utilisation ;
-- comportement de l'utilisateur.
+- Temps passé quotidiennement sur les plateformes.
+- Plateformes utilisées (Instagram, TikTok, YouTube, etc.).
+- Type de contenu consulté.
+- Degré de réceptivité aux recommandations d'influenceurs.
+- Fréquence globale d'utilisation.
 
 ---
 
 ## 🌐 Application Streamlit
 
-L'application développée avec **Streamlit** fournit une interface interactive permettant à l'utilisateur de renseigner différentes caractéristiques de son profil.
-
-Le système utilise ensuite le modèle Random Forest entraîné afin de générer une prédiction.
-
-### Fonctionnement général
+L'interface web permet à un utilisateur de saisir interactivement ses paramètres pour obtenir une prédiction immédiate :
 
 ```text
 Profil utilisateur
@@ -250,53 +204,26 @@ Résultat affiché dans Streamlit
 
 ---
 
-## 🚀 Exemple d'utilisation
-
-Après avoir lancé :
-
-```bash
-streamlit run app.py
-```
-
-l'utilisateur peut accéder à l'interface web et renseigner les informations demandées.
-
-L'application transmet ensuite les données au modèle :
+## 🚀 Flux d'Utilisation
 
 ```text
 Utilisateur
-    ↓
+    │
+    ▼
 Variables liées aux réseaux sociaux
-    ↓
+    │
+    ▼
 Modèle Random Forest
-    ↓
+    │
+    ▼
 Prédiction du comportement d'achat
 ```
 
 ---
 
-## 📦 Dépendances principales
+## 🔐 Fichiers Ignorés (.gitignore)
 
-Les principales bibliothèques utilisées dans ce projet sont :
-
-```text
-streamlit
-scikit-learn
-pandas
-numpy
-joblib
-```
-
-Pour installer toutes les dépendances :
-
-```bash
-pip install streamlit scikit-learn pandas numpy joblib
-```
-
----
-
-## 🔐 Fichiers Git à ignorer
-
-Le fichier `.gitignore` peut notamment contenir :
+Le fichier `.gitignore` doit contenir :
 
 ```gitignore
 __pycache__/
@@ -312,24 +239,16 @@ venv/
 
 ## 📈 Perspectives d'Amélioration
 
-Plusieurs améliorations peuvent être envisagées :
-
-- Tester d'autres algorithmes de classification.
-- Optimiser les hyperparamètres du Random Forest.
-- Ajouter une validation croisée.
-- Comparer plusieurs modèles avec différentes métriques.
-- Ajouter une matrice de confusion interactive.
-- Visualiser l'importance des variables directement dans Streamlit.
-- Ajouter des graphiques d'analyse exploratoire.
+- Tester d'autres familles d'algorithmes (XGBoost, LightGBM, régression logistique pénalisée).
+- Automatiser la recherche d'hyperparamètres (GridSearchCV, Optuna).
+- Intégrer une validation croisée k-fold stratifiée.
+- Afficher une matrice de confusion et les courbes ROC interactives dans Streamlit.
+- Intégrer un graphique interactif de Feature Importance directement dans l'interface.
 - Déployer l'application sur Streamlit Community Cloud.
-- Ajouter une pipeline complète de prétraitement des données.
-- Améliorer l'interface utilisateur et l'expérience utilisateur.
 
 ---
 
-## 🎯 Résultat
-
-Ce projet permet de mettre en pratique différentes étapes d'un projet Data Science :
+## 🎯 Cycle du Projet
 
 ```text
 Collecte des données
@@ -351,21 +270,18 @@ Application Streamlit
 Prédiction interactive
 ```
 
-Il constitue ainsi une démonstration complète d'une approche **Machine Learning + Data Analysis + Application Web**.
-
 ---
 
 ## 👤 Auteur
 
 **Walid Labied**
 
-Data & Software Engineering
+*Data & Software Engineering*
 
-GitHub :  
-https://github.com/walidlabied09
+GitHub : [walidlabied09](https://github.com/walidlabied09)
 
 ---
 
 ## 📄 Licence
 
-Ce projet est réalisé dans un objectif académique et de démonstration des compétences en **Data Science, Machine Learning et développement d'applications interactives**.
+Ce projet est réalisé dans un cadre académique et de démonstration technique en Data Science et Machine Learning.
